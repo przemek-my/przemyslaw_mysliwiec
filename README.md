@@ -1,20 +1,32 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 🌐 Moje Portfolio
 
-# Run and deploy your AI Studio app
+To jest moje osobiste portfolio stworzone w React.
 
-This contains everything you need to run your app locally.
+Strona prezentuje:
+- informacje o mnie
+- moje projekty
+- używane technologie
+- dane kontaktowe
 
-View your app in AI Studio: https://ai.studio/apps/513929c5-3965-4d7a-8e9d-55d383fb09b8
+## 🚀 Demo
 
-## Run Locally
+Strona dostępna online:  
+👉 https://twojadomena.pl  
 
-**Prerequisites:**  Node.js
+## 🛠 Technologie
 
+Projekt został zbudowany przy użyciu:
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- React
+- JavaScript
+- HTML5
+- CSS3
+- (opcjonalnie: Vite / Create React App)
+
+## 📦 Instalacja lokalna
+
+Aby uruchomić projekt lokalnie:
+
+```bash
+npm install
+npm start
