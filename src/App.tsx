@@ -1,3 +1,4 @@
+import emailjs from "@emailjs/browser";
 import {
   motion,
   useScroll,
@@ -176,7 +177,7 @@ export default function App() {
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
-  const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success'>('idle');
+  const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -209,10 +210,30 @@ export default function App() {
     if (!validate()) return;
 
     setFormStatus('sending');
-    setTimeout(() => {
-      setFormStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 1500);
+
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    emailjs
+      .send(
+        serviceId,
+        templateId,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        },
+        publicKey
+      )
+      .then(() => {
+        setFormStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      })
+      .catch(() => {
+        setFormStatus('error');
+      });
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -432,7 +453,7 @@ export default function App() {
             className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl grain-overlay w-full lg:max-w-md ml-auto"
           >
             <img
-              src="/images/image2.JPG"
+              src="/images/image2.webp"
               alt="Przemysław Myśliwiec Working"
               className="w-full h-full object-cover opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-700"
             />
@@ -450,7 +471,7 @@ export default function App() {
             className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl order-2 lg:order-1 grain-overlay w-full lg:max-w-md mr-auto"
           >
             <img
-              src="/images/image3.JPG"
+              src="/images/image3.webp"
               alt="Technology Focus"
               className="w-full h-full object-cover opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-700"
             />
@@ -621,6 +642,28 @@ export default function App() {
                   className="inline-flex items-center gap-2 px-8 py-4 bg-brand-text text-brand-bg rounded-xl text-[11px] font-bold uppercase tracking-widest hover:scale-105 active:scale-95 transition-all"
                 >
                   Powrót do formularza
+                </button>
+              </motion.div>
+            ) : formStatus === 'error' ? (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="text-center space-y-8"
+              >
+                <div className="w-20 h-20 bg-red-500/10 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <X size={40} />
+                </div>
+                <div className="space-y-4">
+                  <h3 className="text-2xl md:text-3xl font-bold tracking-tight">Ups, coś poszło nie tak</h3>
+                  <p className="text-brand-text/60 leading-relaxed max-w-sm mx-auto">
+                    Nie udało się wysłać wiadomości. Spróbuj ponownie lub napisz bezpośrednio na kontakt@przemyslawmysliwiec.pl
+                  </p>
+                </div>
+                <button
+                  onClick={() => setFormStatus('idle')}
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-brand-text text-brand-bg rounded-xl text-[11px] font-bold uppercase tracking-widest hover:scale-105 active:scale-95 transition-all"
+                >
+                  Spróbuj ponownie
                 </button>
               </motion.div>
             ) : (
