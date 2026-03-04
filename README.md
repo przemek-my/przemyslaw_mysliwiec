@@ -1,17 +1,10 @@
-# 🌐 Moje Portfolio
+# Przemyslaw Mysliwiec
 
-To jest moje osobiste portfolio stworzone w React.
+Moje osobiste portfolio stworzone w React.
 
-Strona prezentuje:
-- informacje o mnie
-- moje projekty
-- używane technologie
-- dane kontaktowe
+Strona dostępna online:
+👉 https://przemyslawmysliwiec.pl 
 
-## 🚀 Demo
-
-Strona dostępna online:  
-👉 https://twojadomena.pl  
 
 ## 🛠 Technologie
 
