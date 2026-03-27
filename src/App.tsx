@@ -36,9 +36,10 @@ const Section = ({ children, className = "", id = "" }: { children: ReactNode, c
 
 const ExperienceItem = ({ year, company, role, description }: { year: string, company: string, role: string, description: string }) => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
+    initial={{ opacity: 0, y: 36 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
+    viewport={{ once: true, margin: "-80px" }}
+    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     className="border-l-2 border-brand-text/10 pl-6 md:pl-8 pb-10 md:pb-12 relative last:pb-0"
   >
     <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-brand-text" />
@@ -149,7 +150,7 @@ const LogosMarquee = () => {
             key={i}
             src={logo.src}
             alt={logo.alt}
-            className="h-5 md:h-8 opacity-25 grayscale hover:opacity-100 transition-opacity flex-shrink-0"
+            className="h-4 md:h-6 opacity-25 grayscale hover:opacity-100 transition-opacity flex-shrink-0"
           />
         ))}
       </div>
@@ -425,9 +426,10 @@ export default function App() {
         {/* Part 1 */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-8">
               Pasja do jakości,<br />napędzana automatyzacją.
@@ -458,9 +460,10 @@ export default function App() {
             </div>
           </motion.div>
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, scale: 0.97, y: 24 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
             className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl grain-overlay w-full lg:max-w-md ml-auto"
           >
             <img
@@ -476,9 +479,10 @@ export default function App() {
         {/* Part 2 - Reversed Layout */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, scale: 0.97, y: 24 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl order-2 lg:order-1 grain-overlay w-full lg:max-w-md mr-auto"
           >
             <img
@@ -491,9 +495,10 @@ export default function App() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
             className="order-1 lg:order-2"
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-8">
@@ -628,9 +633,10 @@ export default function App() {
           </div>
 
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
             className="bg-white p-8 md:p-12 rounded-[2rem] shadow-2xl shadow-black/5 border border-brand-text/5 min-h-[400px] flex flex-col justify-center"
           >
             {formStatus === 'success' ? (
