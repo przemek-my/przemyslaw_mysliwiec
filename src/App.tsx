@@ -183,6 +183,17 @@ export default function App() {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
 
+  // Lock viewport height on mount to prevent Instagram browser toolbar jump
+  useEffect(() => {
+    const setVh = () => {
+      document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+    };
+    setVh();
+    // Only recompute on orientation change, NOT on scroll (that's what causes the jump)
+    window.addEventListener('orientationchange', setVh);
+    return () => window.removeEventListener('orientationchange', setVh);
+  }, []);
+
   // Close menu on scroll or resize
   useEffect(() => {
     const handleScroll = () => setIsMenuOpen(false);
@@ -342,7 +353,7 @@ export default function App() {
       </nav>
 
       {/* Hero Section */}
-      <section className="h-screen flex items-center justify-center relative overflow-hidden px-6">
+      <section style={{ height: 'calc(var(--vh, 1vh) * 100)' }} className="flex items-center justify-center relative overflow-hidden px-6">
         <motion.div
           style={{ opacity, scale }}
           className="text-center z-10 w-full max-w-7xl mx-auto"
@@ -746,7 +757,7 @@ export default function App() {
                   Wszystkie logotypy są znakami towarowymi ich właścicieli i zostały użyte wyłącznie w celach informacyjnych.
                 </p>
               </div>
-              <a href="#" className="opacity-50 text-sm hover:opacity-100 transition-opacity">Polityka Prywatności</a>
+              <a href="/privacy-policy.html" target="_blank" rel="noopener noreferrer" className="opacity-50 text-sm hover:opacity-100 transition-opacity">Polityka Prywatności</a>
             </div>
           </div>
 
